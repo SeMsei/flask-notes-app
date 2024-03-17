@@ -55,15 +55,19 @@ def edit_note(id):
 
 @app.route('/delete/<int:id>')
 def delete_note(id):
-    if 'user_id' not in session:
+    if not current_user.is_authenticated:
         return redirect(url_for('login'))
+    
+    with app.app_context():
 
-    user_id = session['user_id']
-    return redirect(url_for('index'))
+        Note.query.filter_by(id=id).delete()
+        db.session.commit()
+
+    return redirect(url_for('main'))
 
 @app.route('/')
 def main():
-    if current_user.is_authenticated:
+    if current_user.is_authenticated and 'user_id' in session:
         user_id = current_user.get_id()
         notes = Note.query.filter_by(user_id=user_id)
 
@@ -108,6 +112,7 @@ def login():
             return render_template('login.html', error=error)
         else:
             login_user(user)
+            session['user_id'] = user.get_id()
             return redirect(url_for('main'))
 
     return render_template('login.html', error=error)
