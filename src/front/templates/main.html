@@ -11,6 +11,7 @@
         <h1>Your notes!</h1>
         <a href="{{ url_for('create_note') }}">Create new</a>
         <a href="{{ url_for('logout') }}">Log out</a>
+        <div class="note-grid-container">
             <div class="note-grid">
                 {% for note in notes %}
                     <div class="note">
@@ -22,6 +23,7 @@
                     </div>
                 {% endfor %}
             </div>
+        </div>
     </div>
 
     <script src="{{ url_for('static', filename='index.js') }}"></script>

@@ -32,14 +32,19 @@ body {
     align-items: center;
 }
 
+.note-grid-container {
+    overflow-y: auto;
+    max-height: calc(100vh - 160px); /* Высота контейнера с записками будет равна высоте экрана минус высота заголовка и отступов */
+    padding: 0 20px;
+}
+
 .container {
     background-color: #fff;
-    width: 350px;
+    width: 400px;
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
-    margin-top: 204px;
 }
 
 h1 {
