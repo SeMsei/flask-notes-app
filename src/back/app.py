@@ -32,6 +32,15 @@ class Note(db.Model):
     Text = db.Column(db.String(1000), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+    def __str__(self):
+        return f'Header: {self.Header}; Text: {self.Text};'
+
+    def set_header(self, header):
+        self.Header = header
+
+    def set_text(self, text):
+        self.Text = text
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -39,19 +48,23 @@ def load_user(user_id):
 
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_note(id):
-    if 'user_id' not in session:
+    if not current_user.is_authenticated:
         return redirect(url_for('login'))
 
     if request.method == 'GET':
-        note = None
+        note = Note.query.filter_by(id=id).first()
 
         if not note:
-            return redirect(url_for('index'))
-
+            return redirect(url_for('main'))
+        
         return render_template('edit.html', note=note)
 
     elif request.method == 'POST':
-        return redirect(url_for('index'))
+        with app.app_context():
+            note = db.session.query(Note).filter_by(id=id).update(dict(Header=request.form.get('header'), Text=request.form.get('text')))
+            db.session.commit()
+
+        return redirect(url_for('main'))
 
 @app.route('/create', methods=['GET', 'POST'])
 def create_note():
@@ -62,6 +75,7 @@ def create_note():
         return render_template('create.html')
     elif request.method == 'POST':
         note = Note(Header=request.form.get('header'), Text=request.form.get('text'), user_id=current_user.get_id())
+        
         with app.app_context():
             db.session.add(note)
             db.session.commit()
