@@ -1,0 +1,97 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(90deg, #56CCF2, #2F80ED);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background-color: #fff;
+    width: 350px;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #2F80ED;
+    transition: all 0.3s ease-in-out;
+}
+
+h1:hover {
+    transform: scale(1.05);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #999;
+    font-size: 16px;
+    transition: all 0.5s ease-in-out;
+    transform: scale(1);
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #2F80ED;
+}
+
+input[type="text"]:active,
+textarea:active {
+    box-shadow: 0 0 0 3px #2F80ED;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #2F80ED;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+}
+
+button[type="submit"]:hover {
+    background-color: #19549b;
+}
+
+#error-message {
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
+    transition: all 0.3s ease-in-out;
+}
+
+#error-message.hide {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+textarea {
+    resize: none; /* Запрещает изменение размера поля ввода текста пользователем */
+    height: 150px; /* Устанавливает высоту поля ввода текста */
+}

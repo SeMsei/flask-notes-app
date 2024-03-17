@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='create.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Create Note</h1>
+        <form id="create-form" action="{{ url_for('create_note') }}" method="post">
+            <label id="header-label" for="header">Header:</label>
+            <input type="text" id="header" name="header" required>
+            <label id="text-label"   for="text">Text:</label>
+            <textarea type="text" id="text" name="text" required></textarea>
+            <button type="submit">Create</button>
+        </form>
+        <p id="error-message">{{error}}</p>
+    </div>
+    <script src="{{ url_for('static', filename='create.js') }}"></script>
+</body>
+</html>

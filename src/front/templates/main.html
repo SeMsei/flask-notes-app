@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <h1>Your notes!</h1>
-        <a href="{{ url_for('edit_note', id=1) }}">Create new</a>
+        <a href="{{ url_for('create_note') }}">Create new</a>
         <a href="{{ url_for('logout') }}">Log out</a>
             <div class="note-grid">
                 {% for note in notes %}
