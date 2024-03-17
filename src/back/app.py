@@ -117,6 +117,10 @@ def register():
             error = 'Username already exists'
             return render_template('register.html', error=error)
         
+        if password1 != password:
+            error = 'Passwords must match '
+            return render_template('register.html', error=error)
+        
         create_user(username, password)
 
         return redirect(url_for('login'))
