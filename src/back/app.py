@@ -105,8 +105,6 @@ def main():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    error = None
-
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -123,12 +121,10 @@ def register():
 
         return redirect(url_for('login'))
 
-    return render_template('register.html', error=error)
+    return render_template('register.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    error = None
-
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -143,7 +139,7 @@ def login():
             login_user(user)
             return redirect(url_for('main'))
 
-    return render_template('login.html', error=error)
+    return render_template('login.html')
 
 @app.route('/logout')
 @login_required
