@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App - Login/Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Your notes!</h1>
+        <a href="{{ url_for('edit_note', id=1) }}">Create new</a>
+        <a href="{{ url_for('logout') }}">Log out</a>
+            <div class="note-grid">
+                {% for note in notes %}
+                    <div class="note">
+                        <h3>{{ note.Header }}</h3>
+                        <p>{{note.Text}}</p>
+                        <br>
+                        <a href="{{ url_for('edit_note', id=note.id) }}">Edit</a>
+                        <a href="{{ url_for('delete_note', id=note.id) }}" onclick="return confirm('Are you sure?')">Delete</a>
+                    </div>
+                {% endfor %}
+            </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+</body>
+</html>
