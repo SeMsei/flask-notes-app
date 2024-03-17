@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+from flask_bcrypt import Bcrypt
 import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
@@ -11,6 +12,7 @@ app.secret_key = 'your_secret_key'
 db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
+bcrypt = Bcrypt(app)
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -21,10 +23,10 @@ class User(db.Model, UserMixin):
         return self.id
 
     def set_password(self, password):
-        self.password = password#generate_password_hash(password)
+        self.password = bcrypt.generate_password_hash(password).decode('utf-8')
 
     def check_password(self, password):
-        return self.password == password#check_password_hash(self.password, password)
+        return bcrypt.check_password_hash(self.password, password)
 
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True, )
