@@ -26,4 +26,5 @@ This is a simple Flask web application for managing personal notes with user aut
 ##
 The app will be accessible at http://127.0.0.1:5000/ in your browser.
 
-Usage Access the application in your browser. Register for a new account or log in with existing credentials. Add, edit, and delete personal notes.
+### Usage 
+Access the application in your browser. Register for a new account or log in with existing credentials. Add, edit, and delete personal notes.
